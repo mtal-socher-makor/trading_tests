@@ -1,9 +1,9 @@
 import React from 'react'
 
-function AxisBottom({xScale, innerWidth}) {
+function AxisBottom({xScale, innerWidth, tickValue}) {
   return (
-      <>
-   { xScale.domain().map(tickValue => (
+      
+  //  { xScale.domain().map(tickValue => (
         <g className="tick" key={tickValue} transform={`translate(${xScale(tickValue)},0)`}>
           <line y2={innerWidth} />
           <text style={{ textAnchor: 'middle' }} dy=".71em" y={innerWidth + 3}>
@@ -11,10 +11,6 @@ function AxisBottom({xScale, innerWidth}) {
             {tickValue}
           </text>
         </g>
-      ))
-      }
-      
-      </>
   )
 }
 

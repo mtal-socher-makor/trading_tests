@@ -1,10 +1,8 @@
 import React from 'react'
 
-function Marks({data,xScale,yScale,xValue,yValue,tooltipFormat, innerHeight}) {
+function Marks({d,xScale,yScale,xValue,yValue,tooltipFormat, innerHeight}) {
   return (
     <>
-        {
-            data.map(d => (
                 <rect
                 className="mark"
                 key={yValue(d)}
@@ -17,7 +15,6 @@ function Marks({data,xScale,yScale,xValue,yValue,tooltipFormat, innerHeight}) {
                 >
                 <title>{d.name} {d.side} {d.type} {Math.round(d.time*1000)}ms</title>
             </rect>
-            ))}
     </>
   )
 }

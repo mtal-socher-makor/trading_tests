@@ -9,7 +9,7 @@ import { Grid } from '@material-ui/core'
 
 const width = "5000";
 const height = 700;
-const margin = { top: 20, right: 30, bottom: 65, left: 30 };
+const margin = { top: 20, right: 30, bottom: 65, left: 60 };
 const xAxisLabelOffset = 50;
 
 
@@ -41,15 +41,22 @@ function BarChart({ data }) {
     <Grid container style={{width: 5000}}>
       <svg width={width} height={height} >
         <g transform={`translate(${margin.left},${margin.top})`}>
+        {xScale.domain().map(tickValue => (
           <AxisBottom
-            xScale={xScale}
-            innerWidth={innerWidth}
-            
+          xScale={xScale}
+          innerWidth={innerWidth}
+          tickValue={tickValue}
+          
           />
+        ))}
+         {yScale.ticks().map(tickValue => (
           <AxisLeft 
             yScale={yScale}
             tickFormat={yAxisTickFormat}
+            innerWidth={innerWidth}
+            tickValue={tickValue}
             />
+         ))}
           <text
             className="axis-label"
             x={innerWidth / 2}
@@ -58,7 +65,21 @@ function BarChart({ data }) {
           >
             Population
           </text>
-          <Marks
+          {
+            data.map( d => 
+            <Marks 
+              d={d}
+              xScale={xScale}
+              yScale={yScale}
+              xValue={xValue}
+              yValue={yValue}
+              innerHeight={innerHeight}
+              //tooltipFormat={yAxisTickFormat}
+            />
+
+            )
+          }
+          {/* <Marks
             data={data}
             xScale={xScale}
             yScale={yScale}
@@ -66,7 +87,7 @@ function BarChart({ data }) {
             yValue={yValue}
             innerHeight={innerHeight}
             //tooltipFormat={yAxisTickFormat}
-          />
+          /> */}
         </g>
       </svg>
     </Grid>
